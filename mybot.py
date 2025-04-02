@@ -1,6 +1,5 @@
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackContext
-from telegram.ext import filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackContext
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('سلام! به ربات من خوش اومدی! 😊')
@@ -18,7 +17,7 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
     
-    print("ربات در حال اجراست...")
+    print("✅ ربات فعال شد!")
     updater.start_polling()
     updater.idle()
 
