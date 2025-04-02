@@ -21,9 +21,8 @@ def main():
     updater.start_polling()
     updater.idle()
 
-if name == 'main':  # 🚨 اصلاح این خط (با دو underline قبل و بعد از name)
+if name == 'main':  # اصلاح شده با __ قبل و بعد از name
     main()
-
 def echo(update: Update, context: CallbackContext):
     update.message.reply_text(f"شما نوشتید: {update.message.text}")
 
