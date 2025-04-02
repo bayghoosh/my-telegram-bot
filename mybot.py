@@ -1,12 +1,14 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackContext
-from telegram.ext import filters as Filters  # 🚨 تغییر این خط
+from telegram.ext import filters as Filters
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('سلام! به ربات من خوش اومدی! 😊')
 
+def echo(update: Update, context: CallbackContext):
+    update.message.reply_text(f"شما نوشتید: {update.message.text}")
+
 def main():
-    # 🚨 استفاده از متغیر محیطی برای توکن (ایمن‌تر)
     import os
     token = os.getenv('TOKEN') or "AAFdnqvhJu-AhgRu0oAEYpSwv0N9UfwwfKE"
     
@@ -14,12 +16,13 @@ def main():
     dispatcher = updater.dispatcher
     
     dispatcher.add_handler(CommandHandler("start", start))
-    
-    # 🚨 تغییر در استفاده از Filters
     dispatcher.add_handler(MessageHandler(Filters.TEXT & ~Filters.COMMAND, echo))
     
     updater.start_polling()
     updater.idle()
+
+if name == 'main':  # 🚨 اصلاح این خط (با دو underline قبل و بعد از name)
+    main()
 
 def echo(update: Update, context: CallbackContext):
     update.message.reply_text(f"شما نوشتید: {update.message.text}")
