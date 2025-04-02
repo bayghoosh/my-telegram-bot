@@ -1,6 +1,6 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackContext
-from telegram.ext import filters as Filters
+from telegram.ext import filters
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('سلام! به ربات من خوش اومدی! 😊')
@@ -12,19 +12,15 @@ def main():
     import os
     token = os.getenv('TOKEN') or "AAFdnqvhJu-AhgRu0oAEYpSwv0N9UfwwfKE"
     
-    updater = Updater(token, use_context=True)
+    updater = Updater(token)
     dispatcher = updater.dispatcher
     
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(MessageHandler(Filters.TEXT & ~Filters.COMMAND, echo))
+    dispatcher.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
     
+    print("ربات در حال اجراست...")
     updater.start_polling()
     updater.idle()
-
-if name == 'main':  # اصلاح شده با __ قبل و بعد از name
-    main()
-def echo(update: Update, context: CallbackContext):
-    update.message.reply_text(f"شما نوشتید: {update.message.text}")
 
 if name == 'main':
     main()
